@@ -1,0 +1,47 @@
+CANTEEN NAME
+	COORDINATE
+		TYPE OF FOOD
+			CAPACITY
+				CLOSING TIME
+
+
+canteen = {'Canteen 1':}
+
+canteen['Canteen1'][foodchoices]
+
+Canteens = {
+				{'Canteen1'= (220,22), },
+				{'Canteen2' = {'foodchoices'= 30, 'coordinate'}}
+
+
+
+				}
+
+
+
+#Defining the rank of the canteen
+
+1. Distance
+2. Variety of food
+3. Capacity
+
+
+
+
+
+
+sorted_Distance = {can2:2,can1:3,can3:6}
+sorted_Variety of food = {can1:50,can3:34,can2:15}
+Capacity = {can3:10,can2:20,can1:30}
+
+
+def getscore
+
+	can2[distance].index() --> 0
+	can2[variety].index() --> 2
+	can2[capacity].index() --> 1
+
+	avg_score = 
+
+
+4
