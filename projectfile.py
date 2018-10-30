@@ -1,28 +1,16 @@
 #This is the start of our python program.
 import pygame
+import datalist
 from time import sleep,clock
 
 def display_map():
- introScreenImage = pygame.image.load("NTU campus.png")
- screen = pygame.display.set_mode((900,700))
- screen.blit(introScreenImage,(0,0))
- pygame.display.flip()
+     introScreenImage = pygame.image.load("NTU campus.png")
+     screen = pygame.display.set_mode((900,700))
+     screen.blit(introScreenImage,(0,0))
+     pygame.display.flip()
 
 #main program
-running = True
 
-while running:
-    pygame.init()
-    display_map()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            running = False
-        #closes the map on ESC key
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouseclick = pygame.mouse.get_pos()
-            print(mouseclick)
 
         #give coordinates on click
 #End
@@ -49,6 +37,8 @@ while running:
 #Get user location either though console input or mouse click
 #Raysheng
 def get_user_location():
+    mouseclick()
+    currentlocation = mouseclick()
     pass
 
 
@@ -80,8 +70,21 @@ def Search_by_price(price,foodlist_canteens):
 
 #To return coordinate of a mouseclick
 #Raysheng
-def Mouseclick():
-    pass
+def mouseclick():
+    running = True
+
+    while running:
+        pygame.init()
+        display_map()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                running = False
+            # closes the map on ESC key
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouseclick = pygame.mouse.get_pos()
+                return (mouseclick)
 
 #allow use to update information of each canteen
 def Update_information():
@@ -90,3 +93,7 @@ def Update_information():
 #allow use to get transport information from current location to the destination
 def transport (user_location,dest_location):
     pass
+
+
+
+print(datalist.canteendata['Canteen 1']['Food Price'].keys())
