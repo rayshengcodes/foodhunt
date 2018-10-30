@@ -95,5 +95,7 @@ def transport (user_location,dest_location):
     pass
 
 
-
-print(datalist.canteendata['Canteen 1']['Food Price'].keys())
+x = input("Canteen: ")
+y = 'Food Price'
+z = input("Hungry? ")
+print(datalist.canteendata[x][y][z])
