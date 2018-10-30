@@ -1,13 +1,20 @@
 #This is the start of our python program.
-import pygame
+import pygame, math, operator
 import datalist
 from time import sleep,clock
 
 def display_map():
-     introScreenImage = pygame.image.load("NTU campus.png")
-     screen = pygame.display.set_mode((900,700))
+     introScreenImage = pygame.image.load("img/Base.jpg")
+     screen = pygame.display.set_mode((750,786))
      screen.blit(introScreenImage,(0,0))
      pygame.display.flip()
+
+
+def display_choice():
+    introScreenImage = pygame.image.load("img/choice.png")
+    screen = pygame.display.set_mode((700, 431))
+    screen.blit(introScreenImage, (0, 0))
+    pygame.display.flip()
 
 #main program
 
@@ -32,31 +39,79 @@ def display_map():
 # 4. Optional or advanced feature:
 
 
-
-
 #Get user location either though console input or mouse click
 #Raysheng
 def get_user_location():
+    print("Click on your current location")
+    sleep(0)
     mouseclick()
     currentlocation = mouseclick()
-    pass
+
+    print("Great, the coordinates of your location now is", currentlocation)
+
+    return currentlocation
+
 
 
 #The function calculate the distance between two points.
 #Keith
 def distance_a_b (location_of_a,location_of_b):
-    pass
+    scale = 3.17723568367148 # in metres (1 pixel = 3.1777m)
+    int_ax = int(location_of_a[0])
+    int_ay = int(location_of_a[1])
+    int_bx = int(location_of_b[0])
+    int_by = int(location_of_b[1])
+
+    x_distance = (int_ax - int_bx)**2
+    y_distance = (int_ay - int_by)**2
+
+    shortest_distance = math.sqrt(x_distance+y_distance)
+
+    return shortest_distance
+
 
 #Display the sorted distances from user’s current location to each canteen in ascending order.
 #Keith
-def sort_distance(user_location,canteens_location):
-    pass
+def sort_distance(user_location):
+    distance_list = {}
+    scale = 3.17723568367148  # in metres (1 pixel = 3.1777m)
+    for i in datalist.canteendata:
+        temp_cord = datalist.canteendata[i]['Coordinates']
+        cal_distance = distance_a_b(user_location,temp_cord)
+        distance_list[i] = cal_distance * scale
+
+    distance_list
+    #print(distance_list)
+
+    sorted_distances = sorted(distance_list.items(),key=operator.itemgetter(1))
+    #print(sorted(distance_list.items(),key=operator.itemgetter(1)))
+
+    #for x,y in sorted_distances:
+        #print("For",x,"Distance is",y,"metres")                        #used to help understand which one is nearer or further
+
+    #for x,y in sorted_distances:
+        #print(x,":",int(y),"metres")
+
+    return sorted_distances
 
 
 #Search all canteens to return the canteen with wanted food
 #Kevin
-def search_by_food(foodname,foodlist_canteens):
-    pass
+def search_by_food(foodname):
+    havefood = []
+    #food_pref = input("What food are you looking at getting? ")
+    for i in datalist.canteendata:
+        #print(i)
+        for j in datalist.canteendata[i]['Food Price']:
+            #print(j)
+            if j == foodname:
+                havefood.append(i)
+    # print("The following places sells",foodname)
+    #
+    # for x in havefood:
+    #     print(x)
+    return havefood
+
 
 #Display the canteens by rank
 #Kevin
@@ -65,7 +120,7 @@ def sort_by_rank(ranklist_canteens):
 
 #Search all canteens to return the food within the searched range
 #Keith
-def Search_by_price(price,foodlist_canteens):
+def search_by_price(price,foodlist_canteens):
     pass
 
 #To return coordinate of a mouseclick
@@ -86,6 +141,47 @@ def mouseclick():
                 mouseclick = pygame.mouse.get_pos()
                 return (mouseclick)
 
+
+#To return on user's choice
+#Raysheng
+def choiceclick():
+    use_price = False
+    use_distance = False
+    use_food = False
+    running = True
+
+    while running:
+        pygame.init()
+        display_choice()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                running = False
+            # closes the map on ESC key
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                choiceclick = pygame.mouse.get_pos()
+                #print(choiceclick)
+                x_cc = choiceclick[0]
+                y_cc = choiceclick[1]
+                if 135 < y_cc < 190:
+                    #print("within range")
+                    if 23 < x_cc < 176:
+                        print("price selected")
+                        use_price = True
+                    elif 274 < x_cc < 428:
+                        print("distance selected")
+                        use_distance = True
+                    elif 525 < x_cc < 679:
+                        print("food selected")
+                        use_food = True
+                if 275 < x_cc < 428 and 372 < y_cc < 410:
+                    running = False
+
+    return (use_price,use_distance,use_food)
+
+
 #allow use to update information of each canteen
 def Update_information():
     pass
@@ -95,7 +191,33 @@ def transport (user_location,dest_location):
     pass
 
 
-x = input("Canteen: ")
-y = 'Food Price'
-z = input("Hungry? ")
-print(datalist.canteendata[x][y][z])
+# print("Hi there, welcome to foodhunt! Please click on your current location.")
+#
+current_location = get_user_location()
+#
+# "What is your criteria for today?" --> Image prompt
+choice = choiceclick()
+#print(choice)
+
+#Use Price
+if choice[0]:
+    choice_price = input("What is your budget?")
+    #print("We are using price")
+
+#Use Distance
+if choice[1]:
+    choice_distance = sort_distance(current_location)
+    #print(choice_distance)
+    print("The nearest 3 food places are:")
+    for i in range(0,3):
+        print(choice_distance[i][0]," (",int(choice_distance[i][1]),"m)",sep='')
+    #print("We are using distance")
+
+#Use Food
+if choice[2]:
+    choice_food = input("What would you like to have? ")
+    chosen_food = search_by_food(choice_food)
+    print("The following places sells", choice_food)
+    for i in chosen_food:
+        print(i,end=', ')
+    #print("We are using food")

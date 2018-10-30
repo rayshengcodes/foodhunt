@@ -1,6 +1,6 @@
 canteendata = {
     'Canteen 1': {
-        'Coordinates': (300, 300),
+        'Coordinates': (482, 457),
         'Variety': 6,
         'Capacity': 310,
         'Opening': (700, 2100),
@@ -14,7 +14,7 @@ canteendata = {
         }
     },
     'Canteen 2': {
-        'Coordinates': (300, 300),
+        'Coordinates': (458, 384),
         'Variety': 6,
         'Capacity': 446,
         'Opening': (700, 2100),
@@ -28,7 +28,7 @@ canteendata = {
         }
     },
     'Canteen 9': {
-        'Coordinates': (300, 300),
+        'Coordinates': (454, 199),
         'Variety': 6,
         'Capacity': 293,
         'Opening': (700, 2100),
@@ -42,7 +42,7 @@ canteendata = {
         }
     },
     'Canteen 11': {
-        'Coordinates': (300, 300),
+        'Coordinates': (503, 89),
         'Variety': 6,
         'Capacity': 210,
         'Opening': (700, 2100),
@@ -56,7 +56,7 @@ canteendata = {
         }
     },
     'Canteen 13': {
-        'Coordinates': (300, 300),
+        'Coordinates': (259, 222),
         'Variety': 6,
         'Capacity': 210,
         'Opening': (700, 2100),
@@ -70,7 +70,7 @@ canteendata = {
         }
     },
     'Canteen 14': {
-        'Coordinates': (300, 300),
+        'Coordinates': (334, 167),
         'Variety': 6,
         'Capacity': 270,
         'Opening': (700, 2100),
@@ -84,7 +84,7 @@ canteendata = {
         }
     },
     'Canteen 16': {
-        'Coordinates': (300, 300),
+        'Coordinates': (277, 285),
         'Variety': 6,
         'Capacity': 304,
         'Opening': (700, 2100),
@@ -98,7 +98,7 @@ canteendata = {
         }
     },
     'Koufu': {
-        'Coordinates': (300, 300),
+        'Coordinates': (332, 590),
         'Variety': 6,
         'Capacity': 1050,
         'Opening': (700, 2100),
@@ -112,7 +112,7 @@ canteendata = {
         }
     },
     'Foodgle Canteen': {
-        'Coordinates': (300, 300),
+        'Coordinates': (442, 88),
         'Variety': 6,
         'Capacity': 440,
         'Opening': (700, 2100),
@@ -126,7 +126,7 @@ canteendata = {
         }
     },
     'North Hill Canteen': {
-        'Coordinates': (300, 300),
+        'Coordinates': (580, 119),
         'Variety': 6,
         'Capacity': 440,
         'Opening': (700, 2100),
@@ -140,7 +140,7 @@ canteendata = {
         }
     },
     'Pioneer Canteen': {
-        'Coordinates': (300, 300),
+        'Coordinates': (589, 491),
         'Variety': 6,
         'Capacity': 408,
         'Opening': (700, 2100),
@@ -154,7 +154,7 @@ canteendata = {
         }
     },
     'Quad Cafe': {
-        'Coordinates': (300, 300),
+        'Coordinates': (254, 680),
         'Variety': 6,
         'Capacity': 500,
         'Opening': (700, 2100),
@@ -167,22 +167,22 @@ canteendata = {
             'Fast Food': 0.0
         }
     },
-    'Ananda Kitchen': {
-        'Coordinates': (300, 300),
+    'North Spine Canteen': {
+        'Coordinates': (176, 464),
         'Variety': 6,
         'Capacity': 90,
         'Opening': (1200, 2230),
         'Food Price': {
-            'Chicken Rice': 0.0,
-            'Fish Soup': 0.0,
+            'Chicken Rice': 2.9,
+            'Fish Soup': 3.4,
             'Laksa': 0.0,
-            'Fishball Noodles': 0.0,
-            'Mala': 0.0,
-            'Fast Food': 8.0
+            'Fishball Noodles': 3.5,
+            'Mala': 12.0,
+            'Fast Food': 0.0
         }
     },
     'KFC': {
-        'Coordinates': (300, 300),
+        'Coordinates': (282, 454),
         'Variety': 6,
         'Capacity': 162,
         'Opening': (730, 2200),
@@ -196,7 +196,7 @@ canteendata = {
         }
     },
     'Macdonalds': {
-        'Coordinates': (300, 300),
+        'Coordinates': (230, 433),
         'Variety': 6,
         'Capacity': 162,
         'Opening': (700, 2359),
@@ -210,7 +210,7 @@ canteendata = {
         }
     },
     'Long John Silver': {
-        'Coordinates': (300, 300),
+        'Coordinates': (279, 399),
         'Variety': 6,
         'Capacity': 162,
         'Opening': (730, 2200),
@@ -224,7 +224,7 @@ canteendata = {
         }
     },
     'Paiks Bibim': {
-        'Coordinates': (300, 300),
+        'Coordinates': (176, 511),
         'Variety': 6,
         'Capacity': 40,
         'Opening': (1000, 2100),
@@ -237,8 +237,8 @@ canteendata = {
             'Fast Food': 8.0
         }
     },
-    'Pizza Hut Express': {
-        'Coordinates': (300, 300),
+    'Pizza Hut': {
+        'Coordinates': (285, 507),
         'Variety': 6,
         'Capacity': 162,
         'Opening': (800, 2100),
@@ -252,7 +252,7 @@ canteendata = {
         }
     },
     'Subway Express': {
-        'Coordinates': (300, 300),
+        'Coordinates': (231, 479),
         'Variety': 6,
         'Capacity': 162,
         'Opening': (800, 2100),
@@ -266,7 +266,7 @@ canteendata = {
         }
     },
     'The Soup Spoon': {
-        'Coordinates': (300, 300),
+        'Coordinates': (225, 533),
         'Variety': 6,
         'Capacity': 104,
         'Opening': (1100, 2100),
