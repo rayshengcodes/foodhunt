@@ -3,9 +3,17 @@ import pygame, math, operator
 import datalist
 from time import sleep,clock
 
+display_width = 750
+display_height = 786
+
+
+black = (0,0,0)
+white = (255,255,255)
+red = (255,255,255)
+
 def display_map():
      introScreenImage = pygame.image.load("img/Base.jpg")
-     screen = pygame.display.set_mode((750,786))
+     screen = pygame.display.set_mode((display_width,display_height))
      screen.blit(introScreenImage,(0,0))
      pygame.display.flip()
 
@@ -68,7 +76,6 @@ def distance_a_b (location_of_a,location_of_b):
 
     return shortest_distance
 
-
 #Display the sorted distances from user’s current location to each canteen in ascending order.
 #Keith
 def sort_distance(user_location):
@@ -126,6 +133,16 @@ def sort_by_rank():
 #Search all canteens to return the food within the searched range
 #Keith
 def search_by_price(price,foodlist_canteens):
+     pricefood = []
+     # price threshold howmuch = input(float("What is your budget?"))
+     for item in datalist.canteendata[i]['Food Price']:
+          priceofitem = datalist.canteendata[i]['Food Price'][item]
+          if priceofitem <= howmuch:
+               pricefood.append(item)
+          else:
+               continue
+     #print("The food within your budget at this place are:", pricefood)
+     return pricefood    
     pass
 
 #To return coordinate of a mouseclick
@@ -226,6 +243,13 @@ if choice[2]:
     print("The following places sells", choice_food)
     for i in chosen_food:
         print(i,end=', ')
+<<<<<<< HEAD
+
+
+pygame.quit()
+    #print("We are using food")
+=======
     #print("We are using food")
 
 
+>>>>>>> 22df31fedbc691d59ea2fc6aa361df45f22d5c84
