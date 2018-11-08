@@ -144,7 +144,7 @@ def search_by_price(price,foodlist_canteens):
                continue
      #print("The food within your budget at this place are:", pricefood)
      return pricefood    
-    pass
+
 
 #To return coordinate of a mouseclick
 #Raysheng
@@ -243,13 +243,8 @@ if choice[2]:
     print("The following places sells", choice_food)
     for i in chosen_food:
         print(i,end=', ')
-<<<<<<< HEAD
 
 
 pygame.quit()
-    #print("We are using food")
-=======
-    #print("We are using food")
 
 
->>>>>>> 22df31fedbc691d59ea2fc6aa361df45f22d5c84
