@@ -126,7 +126,6 @@ def sort_by_rank():
 #Search all canteens to return the food within the searched range
 #Keith
 def search_by_price(price,foodlist_canteens):
-<<<<<<< HEAD
      pricefood = []
      # price threshold howmuch = input(float("What is your budget?"))
      for item in datalist.canteendata[i]['Food Price']:
@@ -137,10 +136,6 @@ def search_by_price(price,foodlist_canteens):
                continue
      #print("The food within your budget at this place are:", pricefood)
      return pricefood    
-
-=======
-    pass
->>>>>>> 7c2e00947e294a825254320e652b9c01ee49707e
 
 #To return coordinate of a mouseclick
 #Raysheng
@@ -240,12 +235,8 @@ if choice[2]:
     print("The following places sells", choice_food)
     for i in chosen_food:
         print(i,end=', ')
-<<<<<<< HEAD
 
 
 pygame.quit()
-=======
-    #print("We are using food")
->>>>>>> 7c2e00947e294a825254320e652b9c01ee49707e
 
 
