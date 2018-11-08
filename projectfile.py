@@ -52,7 +52,6 @@ def display_choice():
 def get_user_location():
     print("Click on your current location")
     sleep(0)
-    mouseclick()
     currentlocation = mouseclick()
 
     print("Great, the coordinates of your location now is", currentlocation)
@@ -201,6 +200,7 @@ def choiceclick():
                         use_food = True
                 if 275 < x_cc < 428 and 372 < y_cc < 410:
                     running = False
+                    pygame.display.quit()
 
     return (use_price,use_distance,use_food)
 
