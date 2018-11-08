@@ -122,8 +122,14 @@ def search_by_food(foodname):
 
 #Display the canteens by rank
 #Kevin
-def sort_by_rank(ranklist_canteens):
-    pass
+def sort_by_rank():
+    ranklist_canteens={}
+    for i in datalist.canteendata:
+        ranklist_canteens[i]=datalist.canteendata[i]['Rating']
+    #put all the canteen name and rating into a new dictionary
+    sorted_names = sorted(ranklist_canteens.items(), key=lambda kv: kv[1], reverse=True)
+    #sort the dictionary in descending order and store in a new dictionary
+    return sorted_names
 
 #Search all canteens to return the food within the searched range
 #Keith
@@ -227,7 +233,13 @@ if choice[2]:
     print("The following places sells", choice_food)
     for i in chosen_food:
         print(i,end=', ')
+<<<<<<< HEAD
 
 
 pygame.quit()
     #print("We are using food")
+=======
+    #print("We are using food")
+
+
+>>>>>>> 22df31fedbc691d59ea2fc6aa361df45f22d5c84
