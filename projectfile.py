@@ -6,14 +6,13 @@ from time import sleep,clock
 display_width = 750
 display_height = 786
 
-
 black = (0,0,0)
 white = (255,255,255)
-red = (255,255,255)
 
 def display_map():
      introScreenImage = pygame.image.load("img/Base.jpg")
      screen = pygame.display.set_mode((display_width,display_height))
+     screen = pygame.display.set_mode((750,786))
      screen.blit(introScreenImage,(0,0))
      pygame.display.flip()
 
