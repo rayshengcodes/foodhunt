@@ -3,9 +3,17 @@ import pygame, math, operator
 import datalist
 from time import sleep,clock
 
+display_width = 750
+display_height = 786
+
+
+black = (0,0,0)
+white = (255,255,255)
+red = (255,255,255)
+
 def display_map():
      introScreenImage = pygame.image.load("img/Base.jpg")
-     screen = pygame.display.set_mode((750,786))
+     screen = pygame.display.set_mode((display_width,display_height))
      screen.blit(introScreenImage,(0,0))
      pygame.display.flip()
 
@@ -68,7 +76,6 @@ def distance_a_b (location_of_a,location_of_b):
     shortest_distance = math.sqrt(x_distance+y_distance)
 
     return shortest_distance
-
 
 #Display the sorted distances from user’s current location to each canteen in ascending order.
 #Keith
@@ -220,4 +227,7 @@ if choice[2]:
     print("The following places sells", choice_food)
     for i in chosen_food:
         print(i,end=', ')
+
+
+pygame.quit()
     #print("We are using food")
