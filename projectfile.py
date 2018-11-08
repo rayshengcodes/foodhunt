@@ -115,8 +115,14 @@ def search_by_food(foodname):
 
 #Display the canteens by rank
 #Kevin
-def sort_by_rank(ranklist_canteens):
-    pass
+def sort_by_rank():
+    ranklist_canteens={}
+    for i in datalist.canteendata:
+        ranklist_canteens[i]=datalist.canteendata[i]['Rating']
+    #put all the canteen name and rating into a new dictionary
+    sorted_names = sorted(ranklist_canteens.items(), key=lambda kv: kv[1], reverse=True)
+    #sort the dictionary in descending order and store in a new dictionary
+    return sorted_names
 
 #Search all canteens to return the food within the searched range
 #Keith
@@ -221,3 +227,5 @@ if choice[2]:
     for i in chosen_food:
         print(i,end=', ')
     #print("We are using food")
+
+
