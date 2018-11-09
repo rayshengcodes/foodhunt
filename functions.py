@@ -3,6 +3,8 @@ import pygame, math, operator
 import datalist
 import functions
 from time import sleep, clock
+clock = pygame.time.Clock()
+
 
 
 def display_map():
@@ -10,6 +12,7 @@ def display_map():
     screen = pygame.display.set_mode((750, 786))
     screen.blit(introScreenImage, (0, 0))
     pygame.display.flip()
+    clock.tick(60)
 
 
 def display_choice():
@@ -17,13 +20,70 @@ def display_choice():
     screen = pygame.display.set_mode((700, 431))
     screen.blit(introScreenImage, (0, 0))
     pygame.display.flip()
+    clock.tick(60)
 
 
-# Get user location either though console input or mouse click
+def mouseclick():
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                running = False
+            # closes the map on ESC key
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouseclick = pygame.mouse.get_pos()
+                return mouseclick
+
+
+def menuoption():
+    use_price = False
+    use_distance = False
+    use_food = False
+    running = True
+    display_choice()
+
+    while running:
+        xandy = mouseclick()
+        x = xandy[0]
+        y = xandy[1]
+        if 135 < y < 190:
+            if 23 < x < 176:
+                if use_price == True:
+                    print("You've unselected price as a criteria")
+                    use_price = False
+                elif use_price == False:
+                    print("You've selected price as a criteria")
+                    use_price = True
+            if 274 < x < 428:
+                if use_distance == True:
+                    print("You've unselected distance as a criteria")
+                    use_distance = False
+                elif use_distance == False:
+                    print("You've selected distance as a criteria")
+                    use_distance = True
+            if 525 < x < 679:
+                if use_food == True:
+                    print("You've unselected food available as a criteria")
+                    use_food = False
+                elif use_distance == False:
+                    print("You've selected food available as a criteria")
+                    use_food = True
+
+        if 275 < x < 428 and 372 < y < 410:
+            running = False
+            pygame.display.flip()
+            # pygame.display.quit()
+            return use_price,use_distance,use_food
+
+
 def get_user_location():
+    display_map()
     print("Click on your current location")
-    sleep(0)
     currentlocation = mouseclick()
+    pygame.display.flip()
+    pygame.display.quit()
 
     print("Great, the coordinates of your location now is", currentlocation)
 
@@ -62,7 +122,8 @@ def sort_distance(user_location):
     # print(sorted(distance_list.items(),key=operator.itemgetter(1)))
 
     # for x,y in sorted_distances:
-    # print("For",x,"Distance is",y,"metres")                        #used to help understand which one is nearer or further
+    # print("For",x,"Distance is",y,"metres")
+    # #used to help understand which one is nearer or further
 
     # for x,y in sorted_distances:
     # print(x,":",int(y),"metres")
@@ -72,19 +133,27 @@ def sort_distance(user_location):
 
 # Search all canteens to return the canteen with wanted food
 # Kevin
-def search_by_food(foodname):
+def search_by_food():
     havefood = []
     # food_pref = input("What food are you looking at getting? ")
+    choice_food = input("What would you like to have? ")
     for i in datalist.canteendata:
         # print(i)
         for j in datalist.canteendata[i]['Food Price']:
             # print(j)
-            if j == foodname:
+            if j == choice_food and datalist.canteendata[i]['Food Price'][j]!=0:
                 havefood.append(i)
     # print("The following places sells",foodname)
     #
     # for x in havefood:
     #     print(x)
+    if len(havefood)==0:
+        print("404, food not found")
+    else:
+        print("The following places sells: ", choice_food)
+        for i in havefood:
+            print(i, end=', ')
+
     return havefood
 
 
@@ -97,6 +166,8 @@ def sort_by_rank():
     # put all the canteen name and rating into a new dictionary
     sorted_names = sorted(ranklist_canteens.items(), key=lambda kv: kv[1], reverse=True)
     # sort the dictionary in descending order and store in a new dictionary
+    for key,val in sorted_names:
+        print(key," (",val,"*)", sep="")
     return sorted_names
 
 
@@ -112,67 +183,10 @@ def search_by_price():
             if x <= howmuch and x != 0:
                 food.append(j)
         pricefood[i] = food
-    print("The food within your budget at this place are:", pricefood)
+    print("The food within your budget at this places are")
+    for key,val in pricefood.items():
+        print(key,":",', '.join(val))
     return pricefood
-
-
-# To return coordinate of a mouseclick
-def mouseclick():
-    running = True
-
-    while running:
-        pygame.init()
-        display_map()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                running = False
-            # closes the map on ESC key
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                mouseclick = pygame.mouse.get_pos()
-                return (mouseclick)
-
-
-# To return on user's choice
-def choiceclick():
-    use_price = False
-    use_distance = False
-    use_food = False
-    running = True
-
-    while running:
-        pygame.init()
-        display_choice()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                running = False
-            # closes the map on ESC key
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                choiceclick = pygame.mouse.get_pos()
-                # print(choiceclick)
-                x_cc = choiceclick[0]
-                y_cc = choiceclick[1]
-                if 135 < y_cc < 190:
-                    # print("within range")
-                    if 23 < x_cc < 176:
-                        print("price selected")
-                        use_price = True
-                    elif 274 < x_cc < 428:
-                        print("distance selected")
-                        use_distance = True
-                    elif 525 < x_cc < 679:
-                        print("food selected")
-                        use_food = True
-                if 275 < x_cc < 428 and 372 < y_cc < 410:
-                    running = False
-
-    pygame.display.quit()
-
-    return (use_price, use_distance, use_food)
 
 
 # Allow use to update information of each canteen
