@@ -134,27 +134,32 @@ def sort_distance(user_location):
 # Search all canteens to return the canteen with wanted food
 # Kevin
 def search_by_food():
-    havefood = []
+ count=0
     # food_pref = input("What food are you looking at getting? ")
+ while True:
+    havefood = []
     choice_food = input("What would you like to have? ")
     for i in datalist.canteendata:
         # print(i)
         for j in datalist.canteendata[i]['Food Price']:
             # print(j)
-            if j == choice_food and datalist.canteendata[i]['Food Price'][j]!=0:
+            if j.lower() == choice_food.lower() and datalist.canteendata[i]['Food Price'][j]!=0:
                 havefood.append(i)
     # print("The following places sells",foodname)
     #
     # for x in havefood:
     #     print(x)
     if len(havefood)==0:
-        print("404, food not found")
+     count+=1
+     if count>=3:
+         print("404, food not found")
+         return havefood
+     print("404, food not found")
     else:
         print("The following places sells: ", choice_food)
         for i in havefood:
-            print(i, end=', ')
-
-    return havefood
+            print(i)
+        return havefood
 
 
 # Display the canteens by rank

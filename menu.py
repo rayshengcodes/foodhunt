@@ -20,20 +20,20 @@ while running:
          "Selected Choice (A-E): ")
 
     if mainmenu.isalpha():
-        if mainmenu == 'A':
+        if mainmenu.upper() == 'A':
             current_location = functions.get_user_location()
             sleep(3)
             locationasked = True
             print("Loading menu...")
             sleep(3)
 
-        if mainmenu == 'B':
+        if mainmenu.upper() == 'B':
             functions.search_by_food()
             sleep(4)
             print("Loading menu...")
             sleep(3)
 
-        if mainmenu == 'C':
+        if mainmenu.upper() == 'C':
             if locationasked == True:
                 choice_distance = functions.sort_distance(current_location)
                 # print(choice_distance)
@@ -48,17 +48,17 @@ while running:
                 print("Loading menu...")
                 sleep(3)
 
-        if mainmenu == 'D':
+        if mainmenu.upper() == 'D':
             functions.search_by_price()
             print("Loading menu...")
             sleep(3)
 
-        if mainmenu == 'E':
+        if mainmenu.upper() == 'E':
             functions.sort_by_rank()
             print("Loading menu...")
             sleep(3)
 
-        if mainmenu == 'F':
+        if mainmenu.upper() == 'F':
 
             while True:
                 changemenu = input \
