@@ -174,7 +174,7 @@ def sort_by_rank():
 # Search all canteens to return the food within the searched range
 def search_by_price():
     pricefood = {}
-    howmuch = float(input("What is your budget?"))
+    howmuch = float(input("What is your budget? "))
     for i in datalist.canteendata:  # iterates canteens
         food = []  # temporary list
         for j in datalist.canteendata[i]['Food Price']:  # iterates food items
@@ -189,11 +189,34 @@ def search_by_price():
     return pricefood
 
 
-# Allow use to update information of each canteen
-def update_information():
-    pass
-
-
 # Allow use to get transport information from current location to the destination
 def transport(user_location, dest_location):
     pass
+
+
+def update_coordinate():
+    k = input("Enter the canteen name to change its coordinates: ")
+    n_x = input("Enter the new x coordinate")
+    n_y = input("Enter the new y coordinate")
+    datalist.canteendata[k]['Coordinates']= (n_x,n_y)
+
+
+def update_rating():
+    while True:
+        j = input("Enter the canteen name to change its rating: ")
+        n_rating = float(input("Enter the new rating"))
+        if 0 <= n_rating <= 5:
+            datalist.canteendata[j]['Rating']= n_rating
+            break
+        else:
+            print("Error in input")
+
+
+def update_price():
+    getcanteen = input("Enter the canteen name to change a dish price: ")
+    food = input("Enter the food item: ")
+    price = float(input("Enter the new price: "))
+
+    datalist.canteendata[getcanteen]['Food Price'][food] = price
+
+    print("The price of ",food," has been changed to $", price,sep='')
