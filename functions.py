@@ -176,10 +176,18 @@ def sort_by_rank():
     return sorted_names
 
 
+def budget():
+    while True:
+        try:
+            return float(input("What is your budget?"))
+        except ValueError:
+            print("Please type numerals.")
+
 # Search all canteens to return the food within the searched range
 def search_by_price():
     pricefood = {}
-    howmuch = float(input("What is your budget? "))
+
+    howmuch = budget()
     for i in datalist.canteendata:  # iterates canteens
         food = []  # temporary list
         for j in datalist.canteendata[i]['Food Price']:  # iterates food items
@@ -190,8 +198,10 @@ def search_by_price():
         pricefood[i] = food
     print("The food within your budget at this places are")
     for key,val in pricefood.items():
-        print(key,":",', '.join(val))
+        print (key, ':', val)
+
     return pricefood
+
 
 
 # Allow use to get transport information from current location to the destination
