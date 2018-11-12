@@ -3,6 +3,8 @@ import pygame, math, operator
 import datalist
 import functions
 from time import sleep, clock
+from operator import itemgetter
+
 clock = pygame.time.Clock()
 
 
@@ -130,6 +132,30 @@ def sort_distance(user_location):
 
     return sorted_distances
 
+def new_sort_distance(user_location,data):
+    distance_list = {}
+    scale = 3.17723568367148  # in metres (1 pixel = 3.1777m)
+    for i in data:
+        temp_cord = data[i]['Coordinates']
+        cal_distance = distance_a_b(user_location, temp_cord)
+        distance_list[i] = cal_distance * scale
+
+    distance_list
+    # print(distance_list)
+
+    sorted_distances = sorted(distance_list.items(), key=operator.itemgetter(1))
+    # print(sorted(distance_list.items(),key=operator.itemgetter(1)))
+
+    # for x,y in sorted_distances:
+    # print("For",x,"Distance is",y,"metres")
+    # #used to help understand which one is nearer or further
+
+    # for x,y in sorted_distances:
+    # print(x,":",int(y),"metres")
+    temp_dict = {}
+    for i,j in sorted_distances:
+        temp_dict[i] = data[i]
+    return temp_dict
 
 # Search all canteens to return the canteen with wanted food
 # Kevin
@@ -174,6 +200,18 @@ def sort_by_rank():
     for key,val in sorted_names:
         print(key," (",val,"*)", sep="")
     return sorted_names
+
+def new_sort_by_rank(data):
+    ranklist_canteens = {}
+    for i in data:
+        ranklist_canteens[i] = data[i]['Rating']
+    # put all the canteen name and rating into a new dictionary
+    sorted_names = sorted(ranklist_canteens.items(), key=lambda kv: kv[1], reverse=True)
+    # sort the dictionary in descending order and store in a new dictionary
+    new_dict = {}
+    for key,val in sorted_names:
+        new_dict[key] = data[key]
+    return new_dict
 
 
 def budget():
@@ -235,3 +273,50 @@ def update_price():
     datalist.canteendata[getcanteen]['Food Price'][food] = price
 
     print("The price of ",food," has been changed to $", price,sep='')
+
+
+def search_by_price(data):
+    pricefood = data
+
+    howmuch = budget()
+    for i in list(pricefood):  # iterates canteens  # temporary list
+        for j in list(pricefood[i]['Food Price']):  # iterates food items
+            if pricefood[i]['Food Price'][j]>howmuch or pricefood[i]['Food Price'][j]==0:
+               del pricefood[i]['Food Price'][j] # j is the dishes name
+        if len(pricefood[i]['Food Price'])==0:
+            del pricefood[i]
+
+    print("The food within your budget at this places are")
+    print(pricefood)
+
+    return pricefood
+
+
+def search_by_food(data):
+ count=0
+    # food_pref = input("What food are you looking at getting? ")
+ while True:
+    newfoodlist=data
+    choice_food = input("What would you like to have? ")
+    for i in list(newfoodlist):
+        # print(i)
+        for j in list(newfoodlist[i]['Food Price']):
+            # print(j)
+            if j.lower() != choice_food.lower() or data[i]['Food Price'][j]==0:
+                del newfoodlist[i]['Food Price'][j]
+        if len(newfoodlist[i]['Food Price'])==0:
+            del newfoodlist[i]
+    # print("The following places sells",foodname)
+
+    # for x in havefood:
+    #     print(x)
+    if len(newfoodlist)==0:
+     count+=1
+     if count>=3:
+         print("404, food not found")
+         return newfoodlist
+     print("404, food not found")
+    else:
+        print("The following places sells: ", choice_food)
+        print(newfoodlist)
+        return newfoodlist
