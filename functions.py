@@ -1,12 +1,12 @@
-# This is the start of our python program.
 import pygame, math, operator
 import datalist
+import copy
+import busstop
 import functions
 from time import sleep, clock
 from operator import itemgetter
 
 clock = pygame.time.Clock()
-
 
 
 def display_map():
@@ -40,9 +40,13 @@ def mouseclick():
 
 
 def menuoption():
-    use_price = False
+    use_rank = False
     use_distance = False
+    use_busstop = False
+    use_price = False
     use_food = False
+    use_halal = False
+
     running = True
     display_choice()
 
@@ -50,34 +54,57 @@ def menuoption():
         xandy = mouseclick()
         x = xandy[0]
         y = xandy[1]
+
         if 135 < y < 190:
             if 23 < x < 176:
-                if use_price == True:
-                    print("You've unselected price as a criteria")
-                    use_price = False
-                elif use_price == False:
-                    print("You've selected price as a criteria")
-                    use_price = True
+                if use_rank:
+                    print("You've unselected rank as a criteria")
+                    use_rank = False
+                elif not use_rank:
+                    print("You've selected rank as a criteria")
+                    use_rank = True
             if 274 < x < 428:
-                if use_distance == True:
+                if use_distance:
                     print("You've unselected distance as a criteria")
                     use_distance = False
-                elif use_distance == False:
+                elif not use_distance:
                     print("You've selected distance as a criteria")
                     use_distance = True
             if 525 < x < 679:
-                if use_food == True:
-                    print("You've unselected food available as a criteria")
-                    use_food = False
-                elif use_distance == False:
-                    print("You've selected food available as a criteria")
-                    use_food = True
+                if use_busstop:
+                    print("You've unselected bus stop as a criteria")
+                    use_busstop = False
+                elif not use_distance:
+                    print("You've selected bus stop as a criteria")
+                    use_busstop = True
 
-        if 275 < x < 428 and 372 < y < 410:
-            running = False
+        if 238 < y < 297:
+            if 23 < x < 176:
+                if use_price:
+                    print("You've unselected price as a criteria")
+                    use_price = False
+                elif not use_price:
+                    print("You've selected price as a criteria")
+                    use_price = True
+            if 274 < x < 428:
+                if use_food:
+                    print("You've unselected food as a criteria")
+                    use_food = False
+                elif not use_food:
+                    print("You've selected food as a criteria")
+                    use_food = True
+            if 525 < x < 679:
+                if use_halal:
+                    print("You've unselected halal as a criteria")
+                    use_halal = False
+                elif not use_halal:
+                    print("You've selected halal as a criteria")
+                    use_halal = True
+
+        if 275 < x < 428 and 364 < y < 402:
             pygame.display.flip()
-            # pygame.display.quit()
-            return use_price,use_distance,use_food
+            #pygame.display.quit()
+            return use_rank, use_distance, use_busstop,use_price,use_food,use_halal
 
 
 def get_user_location():
@@ -217,7 +244,7 @@ def new_sort_by_rank(data):
 def budget():
     while True:
         try:
-            return float(input("What is your budget?"))
+            return float(input("What is your budget? "))
         except ValueError:
             print("Please type numerals.")
 
@@ -275,8 +302,8 @@ def update_price():
     print("The price of ",food," has been changed to $", price,sep='')
 
 
-def search_by_price(data):
-    pricefood = data
+def new_search_by_price(data):
+    pricefood = dict(data)
 
     howmuch = budget()
     for i in list(pricefood):  # iterates canteens  # temporary list
@@ -286,37 +313,50 @@ def search_by_price(data):
         if len(pricefood[i]['Food Price'])==0:
             del pricefood[i]
 
-    print("The food within your budget at this places are")
-    print(pricefood)
-
-    return pricefood
+    # print("The food within your budget at this places are")
+    return pricefood,howmuch
 
 
-def search_by_food(data):
- count=0
-    # food_pref = input("What food are you looking at getting? ")
- while True:
-    newfoodlist=data
-    choice_food = input("What would you like to have? ")
-    for i in list(newfoodlist):
-        # print(i)
-        for j in list(newfoodlist[i]['Food Price']):
-            # print(j)
-            if j.lower() != choice_food.lower() or data[i]['Food Price'][j]==0:
-                del newfoodlist[i]['Food Price'][j]
-        if len(newfoodlist[i]['Food Price'])==0:
-            del newfoodlist[i]
-    # print("The following places sells",foodname)
+def new_search_by_food(data):
+    count=0
+     # food_pref = input("What food are you looking at getting? ")
+    while count<3:
+        newfoodlist=copy.deepcopy(data)
+        choice_food = input("What would you like to have? ")
+        for i in list(newfoodlist):
+            for j in list(newfoodlist[i]['Food Price']):
 
-    # for x in havefood:
-    #     print(x)
-    if len(newfoodlist)==0:
-     count+=1
-     if count>=3:
-         print("404, food not found")
-         return newfoodlist
-     print("404, food not found")
-    else:
-        print("The following places sells: ", choice_food)
-        print(newfoodlist)
-        return newfoodlist
+                if j.lower() != choice_food.lower() or newfoodlist[i]['Food Price'][j]==0:
+                    newfoodlist[i]['Food Price'].pop(j)
+
+            if len(newfoodlist[i]['Food Price'])==0:
+                newfoodlist.pop(i)
+
+        if len(newfoodlist)==0:
+            count+=1
+            if count==3:
+                continue
+            print("404, food not found")
+        else:
+            return newfoodlist, choice_food
+
+    print("Maximum tries reached!!")
+    return data, choice_food
+
+
+def find_bus(nearest_location):
+    nearestbus = {}
+    for i,y in busstop.stops.items():
+        distance = distance_a_b((nearest_location),y)
+        nearestbus[i] = distance
+    nearestbus = sorted(nearestbus.items(), key=operator.itemgetter(1))
+    wantedbus = nearestbus[0]
+    print("The nearest bus stop is at ", wantedbus[0]," which is ",int(wantedbus[1]),".0m away",sep='')
+
+def halal(data):
+    halaldict = {}
+    for i in data:
+        if data[i]['Halal']:
+            halaldict[i]=data[i]
+
+    return halaldict

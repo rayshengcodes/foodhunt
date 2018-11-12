@@ -1,10 +1,9 @@
-import functions
-import pygame,sys,menu
-from time import sleep
+# import functions
+# import pygame,sys,menu
+# from time import sleep
+import menu
 
-pygame.init()
 
-menu()
+menu.startmenu()
 
-pygame.quit()
 
