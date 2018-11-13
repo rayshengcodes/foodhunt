@@ -6,6 +6,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 3.3,
         'Halal': False,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 3.6,
             'Fish Soup': 2.5,
@@ -22,6 +23,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 5,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 4.0,
             'Fish Soup': 3.0,
@@ -38,6 +40,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 2.1,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 2.5,
             'Fish Soup': 0.0,
@@ -54,6 +57,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 1.5,
         'Halal': False,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 3.0,
             'Fish Soup': 3.4,
@@ -70,6 +74,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 3.9,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 2.9,
             'Fish Soup': 3.1,
@@ -86,6 +91,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 4.1,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 2.9,
@@ -102,6 +108,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 4.5,
         'Halal': False,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 3.1,
             'Fish Soup': 3.4,
@@ -118,6 +125,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 4.6,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 3.5,
             'Fish Soup': 2.9,
@@ -134,6 +142,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 3.5,
         'Halal': False,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 3.4,
@@ -150,6 +159,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 3.1,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 3.0,
             'Fish Soup': 3.1,
@@ -166,6 +176,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 2.8,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 3.4,
             'Fish Soup': 3.1,
@@ -182,6 +193,7 @@ canteendata = {
         'Opening': (700, 2100),
         'Rating': 3.9,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 3.0,
@@ -198,6 +210,7 @@ canteendata = {
         'Opening': (1200, 2230),
         'Rating': 2.4,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 2.9,
             'Fish Soup': 3.4,
@@ -214,6 +227,7 @@ canteendata = {
         'Opening': (730, 2200),
         'Rating': 3.7,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 0.0,
@@ -230,6 +244,7 @@ canteendata = {
         'Opening': (700, 2359),
         'Rating': 4,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 0.0,
@@ -246,6 +261,7 @@ canteendata = {
         'Opening': (730, 2200),
         'Rating': 3.1,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 0.0,
@@ -262,6 +278,7 @@ canteendata = {
         'Opening': (1000, 2100),
         'Rating': 4.2,
         'Halal': False,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 0.0,
@@ -278,6 +295,7 @@ canteendata = {
         'Opening': (800, 2100),
         'Rating': 3.7,
         'Halal': True,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 0.0,
@@ -294,6 +312,7 @@ canteendata = {
         'Opening': (800, 2100),
         'Rating': 4.1,
         'Halal': False,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 0.0,
@@ -310,6 +329,7 @@ canteendata = {
         'Opening': (1100, 2100),
         'Rating': 0.4,
         'Halal': False,
+        'Distance': 0,
         'Food Price': {
             'Chicken Rice': 0.0,
             'Fish Soup': 0.0,

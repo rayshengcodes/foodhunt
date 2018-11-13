@@ -115,6 +115,11 @@ def get_user_location():
     pygame.display.quit()
 
     print("Great, the coordinates of your location now is", currentlocation)
+    scale = 3.17723568367148  # in metres (1 pixel = 3.1777m)
+    for i in datalist.canteendata:
+        temp_cord = datalist.canteendata[i]['Coordinates']
+        cal_distance = distance_a_b(currentlocation, temp_cord)
+        datalist.canteendata[i]['Distance']= int(cal_distance * scale)
 
     return currentlocation
 
@@ -135,40 +140,14 @@ def distance_a_b(location_of_a, location_of_b):
     return shortest_distance
 
 
+
 # Display the sorted distances from user’s current location to each canteen in ascending order.
-def sort_distance(user_location):
+
+
+def new_sort_distance(data):
     distance_list = {}
-    scale = 3.17723568367148  # in metres (1 pixel = 3.1777m)
-    for i in datalist.canteendata:
-        temp_cord = datalist.canteendata[i]['Coordinates']
-        cal_distance = distance_a_b(user_location, temp_cord)
-        distance_list[i] = cal_distance * scale
-
-    distance_list
-    # print(distance_list)
-
-    sorted_distances = sorted(distance_list.items(), key=operator.itemgetter(1))
-    # print(sorted(distance_list.items(),key=operator.itemgetter(1)))
-
-    # for x,y in sorted_distances:
-    # print("For",x,"Distance is",y,"metres")
-    # #used to help understand which one is nearer or further
-
-    # for x,y in sorted_distances:
-    # print(x,":",int(y),"metres")
-
-    return sorted_distances
-
-def new_sort_distance(user_location,data):
-    distance_list = {}
-    scale = 3.17723568367148  # in metres (1 pixel = 3.1777m)
     for i in data:
-        temp_cord = data[i]['Coordinates']
-        cal_distance = distance_a_b(user_location, temp_cord)
-        distance_list[i] = cal_distance * scale
-
-    distance_list
-    # print(distance_list)
+        distance_list[i] = data[i]['Distance']
 
     sorted_distances = sorted(distance_list.items(), key=operator.itemgetter(1))
     # print(sorted(distance_list.items(),key=operator.itemgetter(1)))
@@ -182,51 +161,21 @@ def new_sort_distance(user_location,data):
     temp_dict = {}
     for i,j in sorted_distances:
         temp_dict[i] = data[i]
+
+    for i in list(temp_dict):
+        for j in list(temp_dict[i]['Food Price']):  # iterates food items
+            if temp_dict[i]['Food Price'][j]==0:
+               del temp_dict[i]['Food Price'][j]
     return temp_dict
 
 # Search all canteens to return the canteen with wanted food
 # Kevin
-def search_by_food():
- count=0
-    # food_pref = input("What food are you looking at getting? ")
- while True:
-    havefood = []
-    choice_food = input("What would you like to have? ")
-    for i in datalist.canteendata:
-        # print(i)
-        for j in datalist.canteendata[i]['Food Price']:
-            # print(j)
-            if j.lower() == choice_food.lower() and datalist.canteendata[i]['Food Price'][j]!=0:
-                havefood.append(i)
-    # print("The following places sells",foodname)
-    #
-    # for x in havefood:
-    #     print(x)
-    if len(havefood)==0:
-     count+=1
-     if count>=3:
-         print("404, food not found")
-         return havefood
-     print("404, food not found")
-    else:
-        print("The following places sells: ", choice_food)
-        for i in havefood:
-            print(i)
-        return havefood
+
 
 
 # Display the canteens by rank
 
-def sort_by_rank():
-    ranklist_canteens = {}
-    for i in datalist.canteendata:
-        ranklist_canteens[i] = datalist.canteendata[i]['Rating']
-    # put all the canteen name and rating into a new dictionary
-    sorted_names = sorted(ranklist_canteens.items(), key=lambda kv: kv[1], reverse=True)
-    # sort the dictionary in descending order and store in a new dictionary
-    for key,val in sorted_names:
-        print(key," (",val,"*)", sep="")
-    return sorted_names
+
 
 def new_sort_by_rank(data):
     ranklist_canteens = {}
@@ -238,6 +187,14 @@ def new_sort_by_rank(data):
     new_dict = {}
     for key,val in sorted_names:
         new_dict[key] = data[key]
+
+    for i in list(new_dict):
+        for j in list(new_dict[i]['Food Price']):
+            if new_dict[i]['Food Price'][j]==0:
+                del new_dict[i]['Food Price'][j]
+
+
+
     return new_dict
 
 
@@ -249,23 +206,7 @@ def budget():
             print("Please type numerals.")
 
 # Search all canteens to return the food within the searched range
-def search_by_price():
-    pricefood = {}
 
-    howmuch = budget()
-    for i in datalist.canteendata:  # iterates canteens
-        food = []  # temporary list
-        for j in datalist.canteendata[i]['Food Price']:  # iterates food items
-            x = datalist.canteendata[i]['Food Price'][j]  # j is the dishes name
-
-            if x <= howmuch and x != 0:
-                food.append(j)
-        pricefood[i] = food
-    print("The food within your budget at this places are")
-    for key,val in pricefood.items():
-        print (key, ':', val)
-
-    return pricefood
 
 
 
@@ -327,10 +268,10 @@ def new_search_by_food(data):
             for j in list(newfoodlist[i]['Food Price']):
 
                 if j.lower() != choice_food.lower() or newfoodlist[i]['Food Price'][j]==0:
-                    newfoodlist[i]['Food Price'].pop(j)
+                    del newfoodlist[i]['Food Price'][j]
 
             if len(newfoodlist[i]['Food Price'])==0:
-                newfoodlist.pop(i)
+                del newfoodlist[i]
 
         if len(newfoodlist)==0:
             count+=1
@@ -344,6 +285,8 @@ def new_search_by_food(data):
     return data, choice_food
 
 
+
+
 def find_bus(nearest_location):
     nearestbus = {}
     for i,y in busstop.stops.items():
@@ -355,8 +298,12 @@ def find_bus(nearest_location):
 
 def halal(data):
     halaldict = {}
-    for i in data:
-        if data[i]['Halal']:
-            halaldict[i]=data[i]
+    halald=copy.deepcopy(data)
+    for i in list(halald):
+        for j in list(halald[i]['Food Price']):  # iterates food items
+            if halald[i]['Food Price'][j]==0:
+               del halald[i]['Food Price'][j]
+        if halald[i]['Halal']:
+            halaldict[i]=halald[i]
 
     return halaldict
